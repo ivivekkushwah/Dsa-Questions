@@ -15,25 +15,18 @@
  */
 class Solution {
     public int sumNumbers(TreeNode root) {
-        if(root==null)return 0;
-        StringBuilder sb = new StringBuilder();
-        List<String> al = new ArrayList<>();
-        sum(root, al, sb);
-        int total = 0;
-        for(String s : al){
-            total += Integer.parseInt(s);
-        }
-        return total;
+        return sum(root, 0);
     }
-    public void sum(TreeNode node , List<String> al, StringBuilder s){
-        if(node==null)return;
-        s.append(node.val);
-        if(node.left==null && node.right==null){
-            al.add(new String(s.toString()));
-        }else{
-            sum(node.left, al ,s);
-            sum(node.right, al ,s);
+
+    public int sum(TreeNode node, int num) {
+        if (node == null) return 0;
+
+        num = num * 10 + node.val;
+
+        if (node.left == null && node.right == null) {
+            return num;
         }
-        s.deleteCharAt(s.length()-1);
+
+        return sum(node.left, num) + sum(node.right, num);
     }
 }
